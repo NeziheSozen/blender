@@ -1185,7 +1185,12 @@ static PyObject *gPySetAnisotropicFiltering(PyObject *, PyObject *args)
 		return nullptr;
 	}
 
-	KX_GetActiveEngine()->GetRasterizer()->SetAnisotropicFiltering(level);
+	KX_KetsjiEngine *engine = KX_GetActiveEngine();
+	engine->GetRasterizer()->SetAnisotropicFiltering(level);
+
+	for (KX_Scene *scene : engine->CurrentScenes()) {
+		scene->GetTextureRendererManager()->ReloadTextures();
+	}
 
 	Py_RETURN_NONE;
 }
@@ -1279,7 +1284,13 @@ static PyObject *gPySetMipmapping(PyObject *, PyObject *args)
 		return nullptr;
 	}
 
-	KX_GetActiveEngine()->GetRasterizer()->SetMipmapping((RAS_Rasterizer::MipmapOption)val);
+	KX_KetsjiEngine *engine = KX_GetActiveEngine();
+	engine->GetRasterizer()->SetMipmapping((RAS_Rasterizer::MipmapOption)val);
+
+	for (KX_Scene *scene : engine->CurrentScenes()) {
+		scene->GetTextureRendererManager()->ReloadTextures();
+	}
+
 	Py_RETURN_NONE;
 }
 
