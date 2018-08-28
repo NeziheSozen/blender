@@ -315,5 +315,13 @@ void blo_do_versions_upbge(FileData *fd, Library *lib, Main *main)
 				scene->gm.colorManagement = GAME_COLOR_MANAGEMENT_SRGB;
 			}
 		}
+
+		if (!DNA_struct_elem_find(fd->filesdna, "Material", "float", "roughness_bsdf")) {
+			for (Material *mat = main->mat.first; mat; mat = mat->id.next) {
+				mat->roughness_bsdf = 0.5f;
+				mat->reflectance_bsdf = 0.5f;
+				mat->shade_flag |= MA_ENERGY_CONSERV;
+			}
+		}
 	}
 }

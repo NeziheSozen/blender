@@ -152,6 +152,7 @@ typedef struct Material {
 	float param[4];		/* size, smooth, size, smooth, for toonshader, 0 (fac) and 1 (fresnel) also for fresnel shader */
 	float rms;
 	float darkness;
+	float reflectance_bsdf, roughness_bsdf;
 
 	/* runtime - OR'd from 'mtex' */
 	short texco, mapto;
@@ -340,6 +341,7 @@ typedef struct Material {
 #define MA_APPROX_OCCLUSION	4
 #define MA_GROUP_LOCAL      8
 #define MA_INSTANCING		16
+#define MA_ENERGY_CONSERV	32
 
 /* diff_shader */
 #define MA_DIFF_LAMBERT		0
@@ -347,6 +349,8 @@ typedef struct Material {
 #define MA_DIFF_TOON		2
 #define MA_DIFF_MINNAERT    3
 #define MA_DIFF_FRESNEL     4
+#define MA_DIFF_LAMBERT_CUSTOM_BSDF 5
+#define MA_DIFF_BURLEY_BSDF 6
 
 /* spec_shader */
 #define MA_SPEC_COOKTORR	0
@@ -354,6 +358,7 @@ typedef struct Material {
 #define MA_SPEC_BLINN		2
 #define MA_SPEC_TOON		3
 #define MA_SPEC_WARDISO		4
+#define MA_SPEC_GGX_BSDF	5
 
 /* dynamode */
 #ifdef DNA_DEPRECATED

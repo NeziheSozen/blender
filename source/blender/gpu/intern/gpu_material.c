@@ -993,12 +993,23 @@ static void shade_one_light(GPUShadeInput *shi, GPUShadeResult *shr, GPULamp *la
 			else if (ma->diff_shader == MA_DIFF_FRESNEL)
 				GPU_link(mat, "shade_diffuse_fresnel", vn, lv, view,
 				         GPU_uniform(&ma->param[0]), GPU_uniform(&ma->param[1]), &is);
+			else if (ma->diff_shader == MA_DIFF_LAMBERT_CUSTOM_BSDF)
+				GPU_link(mat, "shade_diffuse_BSDF_Custom_Lambert",
+				         GPU_uniform(&ma->reflectance_bsdf), &is);
+			else if (ma->diff_shader == MA_DIFF_BURLEY_BSDF)
+				GPU_link(mat, "shade_diffuse_BSDF_Burley", inp, vn, lv, view,
+				         GPU_uniform(&ma->roughness_bsdf), &is);
 		}
 	}
 
 	if (!(mat->scene->gm.flag & GAME_GLSL_NO_SHADERS))
 		if (ma->shade_flag & MA_CUBIC)
 			GPU_link(mat, "shade_cubic", is, &is);
+
+	/* Energy conservation */
+	if (ma->shade_flag & MA_ENERGY_CONSERV) {
+		GPU_link(mat, "shade_energy_conservation", shi->refl, shi->spec, &shi->refl);
+	}
 
 	i = is;
 	GPU_link(mat, "shade_visifac", i, visifac, shi->refl, &i);
@@ -1140,6 +1151,10 @@ static void shade_one_light(GPUShadeInput *shi, GPUShadeResult *shr, GPULamp *la
 			else if (ma->spec_shader == MA_SPEC_WARDISO) {
 				GPU_link(mat, "shade_wardiso_spec", vn, lv, view,
 				         GPU_uniform(&ma->rms), &specfac);
+			}
+			else if (ma->spec_shader == MA_SPEC_GGX_BSDF) {
+				GPU_link(mat, "shade_BSDF_ggx_spec", vn, lv, view,
+				         GPU_uniform(&ma->roughness_bsdf), GPU_uniform(&ma->reflectance_bsdf), &specfac);
 			}
 			else {
 				GPU_link(mat, "shade_toon_spec", vn, lv, view,
