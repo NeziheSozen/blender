@@ -1552,7 +1552,7 @@ static void shade_one_light(LampRen *lar, ShadeInput *shi, ShadeResult *shr, int
 
 	/* Energy conservation */
 	if (ma->shade_flag & MA_ENERGY_CONSERV) {
-		shi->refl = shi->refl * (1.0f - min(shi->spec, 1.0f));
+		shi->refl = shi->refl * (1.0f - min_ff(shi->spec, 1.0f));
 	}
 
 	if (i>0.0f) {
