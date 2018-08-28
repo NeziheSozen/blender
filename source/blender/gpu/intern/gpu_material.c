@@ -1153,7 +1153,7 @@ static void shade_one_light(GPUShadeInput *shi, GPUShadeResult *shr, GPULamp *la
 				         GPU_uniform(&ma->rms), &specfac);
 			}
 			else if (ma->spec_shader == MA_SPEC_GGX_BSDF) {
-				GPU_link(mat, "shade_BSDF_ggx_spec", vn, lv, view,
+				GPU_link(mat, "shade_BSDF_ggx_spec", inp, vn, lv, view,
 				         GPU_uniform(&ma->roughness_bsdf), GPU_uniform(&ma->reflectance_bsdf), &specfac);
 			}
 			else {

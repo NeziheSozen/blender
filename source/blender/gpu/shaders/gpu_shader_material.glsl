@@ -2359,13 +2359,13 @@ float G1V_F(float LdotH, float k)
 	return 1.0 /(LdotH * (1.0 - k) + k);
 }
 
-void shade_BSDF_ggx_spec(vec3 n, vec3 l, vec3 v, float roughness, float reflectance, out float specfac)
+void shade_BSDF_ggx_spec(float nl, vec3 n, vec3 l, vec3 v, float roughness, float reflectance, out float specfac)
 {
 	float alpha = roughness * roughness;
 
 	vec3 h = normalize(l + v);
 
-	float nl = max(0.0, dot(n,l));
+	nl = max(0.0, nl);
 	float lh = max(0.0, dot(l,h));
 	float nh = max(0.0, dot(n,h));
 
