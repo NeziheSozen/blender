@@ -152,7 +152,7 @@ typedef struct Material {
 	float param[4];		/* size, smooth, size, smooth, for toonshader, 0 (fac) and 1 (fresnel) also for fresnel shader */
 	float rms;
 	float darkness;
-	float reflectance_bsdf, roughness_bsdf;
+	float metallic_bsdf, roughness_bsdf;
 
 	/* runtime - OR'd from 'mtex' */
 	short texco, mapto;
@@ -426,8 +426,9 @@ typedef struct Material {
 #define MAP_AMB			2048
 #define MAP_DISPLACE	4096
 #define MAP_WARP		8192
-// #define MAP_LAYER		16384		/* unused */
+#define MAP_ROUGHNESS	16384
 #define MAP_PARALLAX	32768
+#define MAP_METALLIC	65536
 
 /* volume mapto - reuse definitions for now - a bit naughty! */
 #define MAP_DENSITY				128

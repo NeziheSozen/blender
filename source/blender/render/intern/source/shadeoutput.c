@@ -1538,7 +1538,7 @@ static void shade_one_light(LampRen *lar, ShadeInput *shi, ShadeResult *shr, int
 		else if (ma->diff_shader==MA_DIFF_TOON) is= Toon_Diff(vn, lv, view, ma->param[0], ma->param[1]);
 		else if (ma->diff_shader==MA_DIFF_MINNAERT) is= Minnaert_Diff(inp, vn, view, ma->darkness);
 		else if (ma->diff_shader==MA_DIFF_FRESNEL) is= Fresnel_Diff(vn, lv, view, ma->param[0], ma->param[1]);
-		else if (ma->diff_shader==MA_DIFF_LAMBERT_CUSTOM_BSDF) is= Lambert_Custom_BSDF_Diff(ma->reflectance_bsdf);
+		else if (ma->diff_shader==MA_DIFF_LAMBERT_CUSTOM_BSDF) is= Lambert_Custom_BSDF_Diff(ma->metallic_bsdf);
 		else if (ma->diff_shader==MA_DIFF_BURLEY_BSDF) is= Burley_BSDF_Diff(inp, vn, lv, view, ma->roughness_bsdf);
 		else is= inp;  /* Lambert */
 	}
@@ -1694,7 +1694,7 @@ static void shade_one_light(LampRen *lar, ShadeInput *shi, ShadeResult *shr, int
 				else if (ma->spec_shader==MA_SPEC_WARDISO)
 					specfac= WardIso_Spec( vn, lv, view, ma->rms, (vlr->flag & R_TANGENT) || (ma->mode & MA_TANGENT_V));
 				else if (ma->spec_shader==MA_SPEC_GGX_BSDF)
-					specfac= GGX_BSDF_Spec(vn, lv, view, ma->roughness_bsdf, ma->reflectance_bsdf, (vlr->flag & R_TANGENT) || (ma->mode & MA_TANGENT_V));
+					specfac= GGX_BSDF_Spec(vn, lv, view, ma->roughness_bsdf, ma->metallic_bsdf, (vlr->flag & R_TANGENT) || (ma->mode & MA_TANGENT_V));
 				else
 					specfac= Toon_Spec(vn, lv, view, ma->param[2], ma->param[3], (vlr->flag & R_TANGENT) || (ma->mode & MA_TANGENT_V));
 

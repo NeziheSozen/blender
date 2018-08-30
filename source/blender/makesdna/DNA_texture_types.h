@@ -82,6 +82,7 @@ typedef struct MTex {
 	float raymirrfac, translfac, ambfac;
 	float colemitfac, colreflfac, coltransfac;
 	float densfac, scatterfac, reflfac;
+	float roughnessfac, metallicfac;
 	float ior, refrratio;
 
 	/* particles */
