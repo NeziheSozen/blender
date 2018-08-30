@@ -270,6 +270,8 @@ class MATERIAL_PT_diffuse(MaterialButtonsPanel, Panel):
         col.active = (not mat.use_shadeless)
         col.prop(mat, "diffuse_shader", text="")
         col.prop(mat, "use_diffuse_ramp", text="Ramp")
+        col = layout.column()
+        col.prop(mat, "use_energy_conservation", text="Energy Conservation")
 
         col = layout.column()
         col.active = (not mat.use_shadeless)
@@ -393,7 +395,6 @@ class MATERIAL_PT_shading(MaterialButtonsPanel, Panel):
             sub.active = not mat.use_shadeless
             sub.prop(mat, "use_tangent_shading")
             sub.prop(mat, "use_cubic")
-            sub.prop(mat, "use_energy_conservation")
 
 
 class MATERIAL_PT_transp(MaterialButtonsPanel, Panel):
