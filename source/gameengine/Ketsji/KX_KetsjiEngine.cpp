@@ -845,7 +845,7 @@ void KX_KetsjiEngine::RenderTexture(KX_Scene *scene, const KX_TextureRenderData&
 
 	m_rasterizer->Disable(RAS_Rasterizer::RAS_SCISSOR_TEST);
 
-	textureData.m_bind();
+	textureData.m_bind(m_rasterizer);
 
 	m_rasterizer->Clear(textureData.m_clearMode);
 	// TODO eye ?
@@ -862,7 +862,7 @@ void KX_KetsjiEngine::RenderTexture(KX_Scene *scene, const KX_TextureRenderData&
 
 	scene->RenderBuckets(objects, textureData.m_drawingMode, textureData.m_camTrans, textureData.m_index, m_rasterizer, nullptr);
 
-	textureData.m_unbind();
+	textureData.m_unbind(m_rasterizer);
 
 	m_rasterizer->Enable(RAS_Rasterizer::RAS_SCISSOR_TEST);
 }
