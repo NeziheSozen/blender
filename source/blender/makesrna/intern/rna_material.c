@@ -747,13 +747,13 @@ static void rna_def_material_mtex(BlenderRNA *brna)
 
 	prop = RNA_def_property(srna, "roughness_factor", PROP_FLOAT, PROP_NONE);
 	RNA_def_property_float_sdna(prop, NULL, "roughnessfac");
-	RNA_def_property_ui_range(prop, -1, 1, 10, 3);
+	RNA_def_property_ui_range(prop, 0, 0.999, 10, 3);
 	RNA_def_property_ui_text(prop, "Roughness Factor", "Amount texture affects roughness");
 	RNA_def_property_update(prop, 0, "rna_Material_update");
 
 	prop = RNA_def_property(srna, "metallic_factor", PROP_FLOAT, PROP_NONE);
 	RNA_def_property_float_sdna(prop, NULL, "metallicfac");
-	RNA_def_property_ui_range(prop, -1, 1, 10, 3);
+	RNA_def_property_ui_range(prop, 0, 1, 10, 3);
 	RNA_def_property_ui_text(prop, "Metallic Factor", "Amount texture affects metallic");
 	RNA_def_property_update(prop, 0, "rna_Material_update");
 

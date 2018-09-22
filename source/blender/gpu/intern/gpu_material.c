@@ -1875,7 +1875,7 @@ static void do_material_tex(GPUShadeInput *shi)
 					GPUNodeLink *roughnessfac;
 
 					if (mtex->roughnessfac == 1.0f && (ma->constflag & MA_CONSTANT_TEXTURE)) roughnessfac = stencil;
-					else GPU_link(mat, "math_multiply", GPU_select_uniform(&mtex->roughnessfac, GPU_DYNAMIC_TEX_ROUGHNESS, NULL, ma), stencil, &roughnessfac);
+					else GPU_link(mat, "math_roughness_multiply_comp", GPU_select_uniform(&mtex->roughnessfac, GPU_DYNAMIC_TEX_ROUGHNESS, NULL, ma), stencil, &roughnessfac);
 
 					texture_value_blend(
 					        mat, GPU_uniform(&mtex->def_var), shi->roughness, tin, roughnessfac,

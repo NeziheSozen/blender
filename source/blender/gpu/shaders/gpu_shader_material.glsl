@@ -298,6 +298,11 @@ void math_multiply(float val1, float val2, out float outval)
 	outval = val1 * val2;
 }
 
+void math_roughness_multiply_comp(float val1, float val2, out float outval)
+{
+	outval = 1.0 - (val1 * val2);
+}
+
 void math_divide(float val1, float val2, out float outval)
 {
 	if (val2 == 0.0)

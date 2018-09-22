@@ -155,7 +155,8 @@ typedef struct Material {
 	float metallic_bsdf, roughness_bsdf;
 
 	/* runtime - OR'd from 'mtex' */
-	short texco, mapto;
+	short texco, pad6;
+	int mapto, pad7;
 
 	/* ramp colors */
 	struct ColorBand *ramp_col;
